@@ -1,0 +1,6 @@
+@RssTech.Employee.Api_HostAddress = http://localhost:5133
+
+GET {{RssTech.Employee.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

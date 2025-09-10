@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="MediatR" Version="12.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RssTech.Employee.Domain\RssTech.Employee.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UseCases\Auth\Login\Handler\" />
+    <Folder Include="UseCases\Employee\Get\Handler\" />
+    <Folder Include="UseCases\Employee\List\Handler\" />
+    <Folder Include="UseCases\Employee\List\Response\" />
+    <Folder Include="UseCases\Employee\Update\Handler\" />
+  </ItemGroup>
+
+</Project>
