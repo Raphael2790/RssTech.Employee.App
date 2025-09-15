@@ -1,6 +1,6 @@
 ﻿namespace RssTech.Employee.Domain.Enums;
 
-internal enum EmployeeRole
+public enum EmployeeRole
 {
     Employee = 1,
     Manager = 2,

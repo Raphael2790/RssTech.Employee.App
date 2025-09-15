@@ -1,4 +1,11 @@
-﻿namespace RssTech.Employee.Api.Endpoints;
+using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using RssTech.Employee.Application.UseCases.Employee.Create.Request;
+using RssTech.Employee.Application.UseCases.Employee.Create.Response;
+using RssTech.Employee.Common.Contracts;
+
+namespace RssTech.Employee.Api.Endpoints;
 
 public static class EmployeeEndpoint
 {
@@ -15,9 +22,17 @@ public static class EmployeeEndpoint
             .WithName("GetEmployeeById")
             .RequireAuthorization();
 
-        group.MapPost("/", () => "Create a new employee")
-            .WithName("CreateEmployee")
-            .RequireAuthorization();
+        group.MapPost("/", async Task<Results<Ok<Result<CreateEmployeeResponse>>, BadRequest<Result<CreateEmployeeResponse>>>> ([FromServices] IMediator mediator, [FromBody] CreateEmployeeRequest request)
+        =>
+        {
+            var result = await mediator.Send(request);
+
+            return result.IsSuccess
+                ? TypedResults.Ok(result)
+                : TypedResults.BadRequest(result);
+        })
+        .WithName("CreateEmployee")
+        .RequireAuthorization();
 
         group.MapPut("/{id}", (int id) => $"Update employee with ID {id}")
             .WithName("UpdateEmployee")

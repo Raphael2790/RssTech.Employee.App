@@ -4,7 +4,7 @@ using RssTech.Employee.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.ConfigureServices();
+builder.Services.ConfigureServices(builder.Configuration);
 
 builder.Services.AddGlobalExceptionHandler();
 

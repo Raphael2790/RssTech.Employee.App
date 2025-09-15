@@ -8,13 +8,16 @@
 
   <ItemGroup>
 	<PackageReference Include="MediatR" Version="12.4.1" />
+	<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.8" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RssTech.Employee.Data\RssTech.Employee.Infrastructure.csproj" />
     <ProjectReference Include="..\RssTech.Employee.Domain\RssTech.Employee.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\" />
     <Folder Include="UseCases\Auth\Login\Handler\" />
     <Folder Include="UseCases\Employee\Get\Handler\" />
     <Folder Include="UseCases\Employee\List\Handler\" />

@@ -1,4 +1,5 @@
 ﻿using RssTech.Employee.Domain.Entities.Validators;
+using RssTech.Employee.Domain.Enums;
 using RssTech.Employee.Domain.ValueObjects;
 
 namespace RssTech.Employee.Domain.Entities;
@@ -12,6 +13,7 @@ public sealed class Employee : Entity
     public EmployeeDocument Document { get; private set; }
     public List<Phone> Phones { get; private set; } = [];
     public DateTime DateOfBirth { get; private set; }
+    public EmployeeRole Role { get; private set; }
 
     public Guid? ManagerName { get; private set; }
 
@@ -24,6 +26,7 @@ public sealed class Employee : Entity
         EmployeeDocument document,
         List<Phone> phones,
         DateTime dateOfBirth,
+        EmployeeRole role = EmployeeRole.Employee,
         Guid? managerName = null)
     {
         FirstName = firstName;
@@ -33,6 +36,7 @@ public sealed class Employee : Entity
         Document = document;
         Phones = phones;
         DateOfBirth = dateOfBirth;
+        Role = role;
         ManagerName = managerName;
 
         Validate();

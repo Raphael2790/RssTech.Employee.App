@@ -1,9 +1,11 @@
 ﻿using MediatR;
 using RssTech.Employee.Application.UseCases.Employee.Create.Response;
+using RssTech.Employee.Common.Contracts;
+using RssTech.Employee.Domain.Enums;
 
 namespace RssTech.Employee.Application.UseCases.Employee.Create.Request;
 
-public record struct CreateEmployeeRequest : IRequest<CreateEmployeeResponse>
+public record struct CreateEmployeeRequest : IRequest<Result<CreateEmployeeResponse>>
 {
     public string FirstName { get; set; }
 
@@ -20,6 +22,8 @@ public record struct CreateEmployeeRequest : IRequest<CreateEmployeeResponse>
     public string PhoneNumber2 { get; set; }
 
     public DateTime DateOfBirth { get; set; }
+
+    public EmployeeRole Role { get; set; } = EmployeeRole.Employee;
 
     public string ManagerName { get; set; }
 }

@@ -26,6 +26,11 @@ public sealed class EmployeeRepository(AppDbContext appDbContext)
         throw new NotImplementedException();
     }
 
+    public Task<Domain.Entities.Employee?> GetByEmailAsync(string email, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task Update(Domain.Entities.Employee employee, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
