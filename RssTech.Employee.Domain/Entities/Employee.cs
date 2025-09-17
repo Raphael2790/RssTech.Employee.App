@@ -17,6 +17,7 @@ public sealed class Employee : Entity
 
     public Guid? ManagerName { get; private set; }
 
+    private Employee() { }
 
     public Employee(
         string firstName,

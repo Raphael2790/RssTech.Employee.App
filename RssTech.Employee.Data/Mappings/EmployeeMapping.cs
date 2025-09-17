@@ -23,8 +23,10 @@ public class EmployeeMapping : IEntityTypeConfiguration<Domain.Entities.Employee
         {
             email.Property(e => e.Address)
                 .IsRequired()
-                .HasColumnName("Email")
+                .HasColumnName("EmailAddress")
                 .HasMaxLength(100);
+
+            email.HasIndex(e => e.Address).IsUnique();
         });
 
         builder.Property(e => e.Password)
@@ -35,12 +37,18 @@ public class EmployeeMapping : IEntityTypeConfiguration<Domain.Entities.Employee
         {
             document.Property(d => d.DocumentNumber)
                 .IsRequired()
-                .HasColumnName("Document")
+                .HasColumnName("DocumentNumber")
                 .HasMaxLength(20);
+
+            document.HasIndex(d => d.DocumentNumber).IsUnique();
         });
 
         builder.Property(e => e.DateOfBirth)
             .IsRequired();
+
+        builder.Property(e => e.Role)
+            .IsRequired()
+            .HasConversion<int>();
 
         builder.Property(e => e.ManagerName)
             .IsRequired(false);
@@ -60,8 +68,5 @@ public class EmployeeMapping : IEntityTypeConfiguration<Domain.Entities.Employee
 
             phone.HasIndex("EmployeeId", "Number").IsUnique();
         });
-
-        builder.HasIndex(e => e.Email.Address).IsUnique();
-        builder.HasIndex(e => e.Document.DocumentNumber).IsUnique();
     }
 }

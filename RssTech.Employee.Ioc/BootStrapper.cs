@@ -84,6 +84,7 @@ public static class BootStrapper
         return services;
     }
 
+
     private static IServiceCollection AddMediatR(this IServiceCollection services)
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(

@@ -11,12 +11,13 @@ public static class EmployeeMapper
             new Domain.ValueObjects.Email(createEmployee.Email),
             createEmployee.Password,
             new Domain.ValueObjects.EmployeeDocument(createEmployee.DocumentNumber),
-            [.. new List<Domain.ValueObjects.Phone>
+            new List<Domain.ValueObjects.Phone>
             {
                 new(createEmployee.PhoneNumber1),
-                string.IsNullOrWhiteSpace(createEmployee.PhoneNumber2) ? null : new(createEmployee.PhoneNumber2)
-            }.Where(phone => phone is not null)],
+                !string.IsNullOrWhiteSpace(createEmployee.PhoneNumber2) ? new(createEmployee.PhoneNumber2) : null
+            }.Where(phone => phone is not null).ToList(),
             createEmployee.DateOfBirth,
+            createEmployee.Role,
             string.IsNullOrWhiteSpace(createEmployee.ManagerName) ? null : Guid.Parse(createEmployee.ManagerName)
         );
 }

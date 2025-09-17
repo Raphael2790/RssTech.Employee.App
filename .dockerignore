@@ -1,0 +1,37 @@
+# Ignore git files
+.git
+.gitignore
+.gitattributes
+
+# Ignore build output
+**/bin/
+**/obj/
+
+# Ignore IDE files
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Ignore test results
+TestResults/
+**/*.trx
+**/*.coverage
+
+# Ignore documentation
+README.md
+*.md
+
+# Ignore package management
+**/.nuget/
+**/packages/
+
+# Ignore temporary files
+**/.tmp/
+**/tmp/
+
+# Ignore deployment files
+deploy/
+
+# Ignore Claude files
+.claude/

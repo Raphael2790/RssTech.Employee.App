@@ -26,4 +26,16 @@ public record struct CreateEmployeeRequest : IRequest<Result<CreateEmployeeRespo
     public EmployeeRole Role { get; set; } = EmployeeRole.Employee;
 
     public string ManagerName { get; set; }
+
+    public CreateEmployeeRequest()
+    {
+        FirstName = string.Empty;
+        LastName = string.Empty;
+        Email = string.Empty;
+        Password = string.Empty;
+        DocumentNumber = string.Empty;
+        PhoneNumber1 = string.Empty;
+        PhoneNumber2 = string.Empty;
+        ManagerName = string.Empty;
+    }
 }

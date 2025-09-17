@@ -2,9 +2,12 @@
 
 namespace RssTech.Employee.Infrastructure.Context;
 
-public sealed class AppDbContext(DbContextOptions<AppDbContext> options) 
-    : DbContext(options)
+public sealed class AppDbContext : DbContext
 {
+    public AppDbContext() { }
+
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
     public DbSet<Domain.Entities.Employee> Employees { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
