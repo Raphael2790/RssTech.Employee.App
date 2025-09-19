@@ -21,6 +21,48 @@ services:
       timeout: 10s
       retries: 5
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.0
+    container_name: employee-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+      - xpack.security.enabled=false
+      - xpack.security.enrollment.enabled=false
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - employee-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.15.0
+    container_name: employee-kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - xpack.security.enabled=false
+    ports:
+      - "5601:5601"
+    networks:
+      - employee-network
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5601/api/status || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
   app:
     build:
       context: ..
@@ -29,6 +71,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - DATABASE_URL=Host=postgres;Database=EmployeeDb;Username=postgres;Password=postgres
+      - ConnectionStrings__Elasticsearch=http://elasticsearch:9200
       - Jwt__SecretKey=sua_chave_secreta_super_segura_para_producao_com_pelo_menos_32_caracteres
       - Jwt__Issuer=RssTech.Employee.Api
       - Jwt__Audience=RssTech.Employee.Client
@@ -37,6 +80,8 @@ services:
       - "8080:8080"
     depends_on:
       postgres:
+        condition: service_healthy
+      elasticsearch:
         condition: service_healthy
     networks:
       - employee-network
@@ -50,6 +95,7 @@ services:
 
 volumes:
   postgres_data:
+  elasticsearch_data:
 
 networks:
   employee-network:

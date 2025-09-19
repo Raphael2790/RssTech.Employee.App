@@ -2,8 +2,12 @@ using RssTech.Employee.Api.Endpoints;
 using RssTech.Employee.Api.Extensions;
 using RssTech.Employee.Infrastructure.Extensions;
 using RssTech.Employee.Ioc;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configuração do Serilog via extensão
+builder.ConfigureSerilog();
 
 builder.Services.ConfigureServices(builder.Configuration);
 
@@ -21,4 +25,16 @@ app.UseGlobalExceptionHandler();
 
 app.UseServices(builder.Configuration);
 
-app.Run();
+try
+{
+    Log.Information("Iniciando aplicação Employee API");
+    app.Run();
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Aplicação falhou durante a inicialização");
+}
+finally
+{
+    SerilogExtensions.EnsureSerilogClosed();
+}
