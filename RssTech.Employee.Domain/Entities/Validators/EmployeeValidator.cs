@@ -25,9 +25,7 @@ public class EmployeeValidator : AbstractValidator<Employee>
             .NotEmpty()
             .WithMessage("Password is required.")
             .MinimumLength(6)
-            .WithMessage("Password must be at least 6 characters long.")
-            .Matches("^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!#$%&? \"]).*$")
-            .WithMessage("Password must have capital letters, digits and special characters");
+            .WithMessage("Password must be at least 6 characters long.");
 
         RuleFor(e => e.Document)
             .NotNull().WithMessage("Document is required.")

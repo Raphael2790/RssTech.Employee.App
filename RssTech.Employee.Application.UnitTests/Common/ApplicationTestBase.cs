@@ -105,16 +105,17 @@ public abstract class ApplicationTestBase
         string firstName = "John",
         string lastName = "Doe",
         string email = "john.doe@example.com",
-        string password = "hashedPassword",
+        string password = "Password123!",
         string documentNumber = "123.456.789-01",
         DateTime? dateOfBirth = null,
         EmployeeRole role = EmployeeRole.Employee)
     {
+        var hashedPassword = RssTech.Employee.Common.Utils.PasswordHashGenerator.HashPassword(password);
         var employee = new RssTech.Employee.Domain.Entities.Employee(
             firstName,
             lastName,
             new Email(email),
-            password,
+            hashedPassword,
             new EmployeeDocument(documentNumber),
             [new Phone("11999999999")],
             dateOfBirth ?? DateTime.Now.AddYears(-25),

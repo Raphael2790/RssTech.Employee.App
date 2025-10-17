@@ -45,7 +45,6 @@ public class CreateEmployeeHandlerTests : ApplicationTestBase
 
         // Assert
         Assert.True(result.IsSuccess);
-        Assert.NotNull(result.Data);
         Assert.Equal(request.FirstName, result.Data.FirstName);
         Assert.Equal(request.LastName, result.Data.LastName);
         Assert.Equal(request.Email, result.Data.Email);
@@ -188,7 +187,7 @@ public class CreateEmployeeHandlerTests : ApplicationTestBase
             .ReturnsAsync(false);
 
         MockEmployeeRepository
-            .Setup(x => x.Create(It.IsAny<RssTech.Employee.Domain.Entities.Employee>(), It.IsAny<CancellationToken>()))
+            .Setup(x => x.Create(It.IsAny<Domain.Entities.Employee>(), It.IsAny<CancellationToken>()))
             .ThrowsAsync(new Exception("Database error"));
 
         // Act

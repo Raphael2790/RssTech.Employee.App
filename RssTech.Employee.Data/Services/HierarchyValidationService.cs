@@ -39,4 +39,10 @@ public sealed class HierarchyValidationService : IHierarchyValidationService
     {
         return user?.Identity?.IsAuthenticated == true;
     }
+
+    public bool CanUpdateEmployee(ClaimsPrincipal currentUser, Guid targetEmployeeId)
+    {
+        // TODO: Implement actual logic
+        return true;
+    }
 }

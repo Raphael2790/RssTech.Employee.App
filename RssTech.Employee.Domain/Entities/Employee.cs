@@ -17,7 +17,14 @@ public sealed class Employee : Entity
 
     public Guid? ManagerName { get; private set; }
 
-    private Employee() { }
+    private Employee()
+    {
+        FirstName = string.Empty;
+        LastName = string.Empty;
+        Email = new Email(string.Empty);
+        Password = string.Empty;
+        Document = new EmployeeDocument(string.Empty);
+    }
 
     public Employee(
         string firstName,
@@ -40,6 +47,25 @@ public sealed class Employee : Entity
         Role = role;
         ManagerName = managerName;
 
+        Validate();
+    }
+
+    public void Update(string firstName, string lastName)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Validate();
+    }
+
+    public void UpdatePassword(string password)
+    {
+        Password = password;
+        Validate();
+    }
+
+    public void UpdatePhones(List<Phone> phones)
+    {
+        Phones = phones;
         Validate();
     }
 

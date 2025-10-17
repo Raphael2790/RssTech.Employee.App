@@ -2,9 +2,9 @@
 
 public record class EmployeeDocument
 {
-    public string DocumentNumber { get; init; }
+    public string? DocumentNumber { get; init; }
 
-    public EmployeeDocument(string documentNumber)
+    public EmployeeDocument(string? documentNumber)
     {
         DocumentNumber = documentNumber;
     }
