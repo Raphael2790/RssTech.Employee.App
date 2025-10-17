@@ -1,9 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+using MediatR;
+using RssTech.Employee.Application.UseCases.Employee.Update.Response;
+using RssTech.Employee.Common.Contracts;
+using System.ComponentModel.DataAnnotations;
 
 namespace RssTech.Employee.Application.UseCases.Employee.Update.Request;
 
-public record struct UpdateEmployeeRequest
+public class UpdateEmployeeRequest : IRequest<Result<UpdateEmployeeResponse>>
 {
+    public Guid Id { get; set; }
+
     [Required(ErrorMessage = "First name field can not be empty")]
     public string FirstName { get; set; }
 
@@ -17,5 +22,5 @@ public record struct UpdateEmployeeRequest
     [Required(ErrorMessage = "Phone number field can not be empty")]
     public string PhoneNumber1 { get; set; }
 
-    public string PhoneNumber2 { get; set; }
+    public string? PhoneNumber2 { get; set; }
 }
