@@ -1,16 +1,14 @@
-﻿namespace RssTech.Employee.Application.UseCases.Employee.Get.Response;
+using RssTech.Employee.Domain.Enums;
 
-public record struct GetEmployeeResponse
+namespace RssTech.Employee.Application.UseCases.Employee.Get.Response;
+
+public class GetEmployeeResponse
 {
     public Guid Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Email { get; set; }
-    public string DocumentNumber { get; set; }
-    public string PhoneNumber1 { get; set; }
-    public string PhoneNumber2 { get; set; }
-    public DateTime DateOfBirth { get; set; }
-    public string ManagerName { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public EmployeeRole Role { get; set; }
+    public DateTime BirthDate { get; set; }
+    public Guid? ManagerName { get; set; }
 }
