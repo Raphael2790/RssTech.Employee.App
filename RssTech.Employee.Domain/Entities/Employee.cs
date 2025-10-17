@@ -43,6 +43,25 @@ public sealed class Employee : Entity
         Validate();
     }
 
+    public void Update(string firstName, string lastName)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Validate();
+    }
+
+    public void UpdatePassword(string password)
+    {
+        Password = password;
+        Validate();
+    }
+
+    public void UpdatePhones(List<Phone> phones)
+    {
+        Phones = phones;
+        Validate();
+    }
+
     public bool IsAdult()
         => DateTime.Now.Year - DateOfBirth.Year >= 18;
 
