@@ -38,4 +38,7 @@ public sealed class EmployeeRepository(AppDbContext appDbContext)
         await appDbContext.Employees.AddAsync(employee, cancellationToken);
         await appDbContext.SaveChangesAsync(cancellationToken);
     }
+
+    public async Task<IEnumerable<Domain.Entities.Employee>> GetAllAsync(CancellationToken cancellationToken)
+        => await appDbContext.Employees.ToListAsync(cancellationToken);
 }
