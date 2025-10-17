@@ -9,4 +9,5 @@ public interface IHierarchyValidationService
     EmployeeRole GetUserRole(ClaimsPrincipal user);
     Guid GetUserId(ClaimsPrincipal user);
     bool IsAuthenticated(ClaimsPrincipal user);
+    bool CanUpdateEmployee(ClaimsPrincipal currentUser, Guid targetEmployeeId);
 }

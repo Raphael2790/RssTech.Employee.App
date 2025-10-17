@@ -15,7 +15,7 @@ public static class EmployeeMapper
             {
                 new(createEmployee.PhoneNumber1),
                 !string.IsNullOrWhiteSpace(createEmployee.PhoneNumber2) ? new(createEmployee.PhoneNumber2) : null
-            }.Where(phone => phone is not null).ToList(),
+            }.Where(phone => phone is not null).ToList()!,
             createEmployee.DateOfBirth,
             createEmployee.Role,
             string.IsNullOrWhiteSpace(createEmployee.ManagerName) ? null : Guid.Parse(createEmployee.ManagerName)

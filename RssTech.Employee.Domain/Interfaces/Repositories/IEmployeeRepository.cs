@@ -9,4 +9,5 @@ public interface IEmployeeRepository
     Task<bool> ExistsById(Guid id, CancellationToken cancellationToken);
     Task Create(Entities.Employee employee, CancellationToken cancellationToken);
     Task Update(Entities.Employee employee, CancellationToken cancellationToken);
+    Task<IEnumerable<Entities.Employee>> GetAllAsync(CancellationToken cancellationToken);
 }

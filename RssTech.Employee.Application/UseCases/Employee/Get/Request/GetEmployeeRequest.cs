@@ -1,6 +1,7 @@
-﻿namespace RssTech.Employee.Application.UseCases.Employee.Get.Request;
+using MediatR;
+using RssTech.Employee.Application.UseCases.Employee.Get.Response;
+using RssTech.Employee.Common.Contracts;
 
-public record struct GetEmployeeRequest
-{
-    public Guid Id { get; set; }
-}
+namespace RssTech.Employee.Application.UseCases.Employee.Get.Request;
+
+public record struct GetEmployeeRequest(Guid Id) : IRequest<Result<GetEmployeeResponse>>;

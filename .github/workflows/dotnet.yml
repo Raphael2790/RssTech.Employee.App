@@ -1,0 +1,58 @@
+name: .NET CI/CD
+
+on:
+  push:
+    branches-ignore:
+      - 'master'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+
+  create_pr:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Open PR to master
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const head = context.ref.replace('refs/heads/', '');
+            const base = 'master';
+            const title = `Auto PR: ${head} -> ${base}`;
+            const body = `Automated pull request created for branch \`${head}\`.\n\nAll tests passed.`;
+
+            if (head === base) {
+              core.info('Push em master ignorado. Nada a fazer.');
+              return;
+            }
+
+            try {
+              const { data } = await github.rest.pulls.create({ owner, repo, title, head, base, body });
+              core.info(`PR #${data.number} created`);
+            } catch (e) {
+              // Se já tiver um PR aberto da mesma branch para master, não falhe o job
+              const msg = (e && e.message) ? e.message : '';
+              if (e.status === 422 && msg.toLowerCase().includes('a pull request already exists')) {
+                core.info('PR já existe; seguindo em frente.');
+              } else {
+                core.setFailed(msg || 'Falha ao criar PR');
+              }
+            }

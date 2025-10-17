@@ -1,7 +1,7 @@
-﻿namespace RssTech.Employee.Application.UseCases.Employee.List.Request;
+using MediatR;
+using RssTech.Employee.Application.UseCases.Employee.List.Response;
+using RssTech.Employee.Common.Contracts;
 
-public record struct ListEmployeesRequest
-{
-    public int PageNumber { get; set; }
-    public int PageSize { get; set; }
-}
+namespace RssTech.Employee.Application.UseCases.Employee.List.Request;
+
+public record struct ListEmployeesRequest(int PageNumber, int PageSize) : IRequest<Result<IEnumerable<ListEmployeesResponse>>>;
