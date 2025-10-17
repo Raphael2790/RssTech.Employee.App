@@ -33,7 +33,7 @@ public sealed class GetEmployeeHandler(
                 LastName = employee.LastName,
                 Email = employee.Email.Address,
                 Role = employee.Role,
-                BirthDate = employee.DateOfBirth,
+                DateOfBirth = employee.DateOfBirth,
                 ManagerName = employee.ManagerName
             };
 
