@@ -22,7 +22,7 @@ namespace RssTech.Employee.Application.UseCases.Employee.List.Handler
             {
                 logger.LogInformation("Processing list employees request");
 
-                var employees = await employeeRepository.GetAll(cancellationToken);
+                var employees = await employeeRepository.GetAllAsync(cancellationToken);
 
                 var response = employees.Select(e => new ListEmployeesResponse
                 {

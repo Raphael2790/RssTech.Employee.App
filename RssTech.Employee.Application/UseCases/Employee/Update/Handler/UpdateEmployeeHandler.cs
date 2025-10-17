@@ -32,7 +32,7 @@ public sealed class UpdateEmployeeHandler(
                 return Result<UpdateEmployeeResponse>.Error("Authentication required");
             }
 
-            var employeeToUpdate = await employeeRepository.GetById(request.Id, cancellationToken);
+            var employeeToUpdate = await employeeRepository.GetByIdAsync(request.Id, cancellationToken);
             if (employeeToUpdate is null)
             {
                 logger.LogWarning("Employee with ID: {EmployeeId} not found for update", request.Id);

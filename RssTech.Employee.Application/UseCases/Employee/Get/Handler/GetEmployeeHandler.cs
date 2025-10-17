@@ -18,7 +18,7 @@ public sealed class GetEmployeeHandler(
         {
             logger.LogInformation("Processing get employee request for ID: {EmployeeId}", request.Id);
 
-            var employee = await employeeRepository.GetById(request.Id, cancellationToken);
+            var employee = await employeeRepository.GetByIdAsync(request.Id, cancellationToken);
 
             if (employee is null)
             {
